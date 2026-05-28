@@ -102,7 +102,3 @@ Se abrirá una pestaña en tu navegador web. Abre el archivo `1_analisis_sentimi
 ## 📄 Licencia
 
 Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](./LICENSE) para obtener más detalles.
-
----
-
-*Creado con ❤️ por Leonel Mendiola (2026).*
