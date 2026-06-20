@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Asistente de Escritura Automática</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <div class="backdrop"></div>
+  <main class="shell">
+    <section class="hero">
+      <div class="badge">OpenAI web · Ollama local · Python</div>
+      <h1>Asistente de Escritura Automática</h1>
+      <p class="hero-copy">Genera, mejora, resume y redacta correos formales desde una interfaz clara y rápida.</p>
+      <div class="hero-note">La consola usa Ollama en local. La interfaz web usa OpenAI y requiere tu API key.</div>
+    </section>
+
+    <section class="workspace">
+      <nav class="tabs" aria-label="Opciones del asistente">
+        <button class="tab active" data-mode="generate_text">Generar texto</button>
+        <button class="tab" data-mode="improve_text">Mejorar texto</button>
+        <button class="tab" data-mode="summarize_text">Resumir texto</button>
+        <button class="tab" data-mode="formal_email">Correo formal</button>
+      </nav>
+
+      <form id="assistantForm" class="card">
+        <div class="grid" id="fields"></div>
+        <div class="actions">
+          <button type="submit" class="primary">Generar con OpenAI</button>
+          <button type="button" id="clearBtn" class="secondary">Limpiar</button>
+        </div>
+      </form>
+
+      <section class="result-card">
+        <div class="result-header">
+          <h2>Resultado</h2>
+          <span id="statusPill" class="pill">Listo</span>
+        </div>
+        <pre id="result">Aquí aparecerá la respuesta generada.</pre>
+      </section>
+    </section>
+  </main>
+
+  <template id="template-generate_text">
+    <label>
+      <span>Tema</span>
+      <textarea name="tema" rows="5" placeholder="Ej. Un correo solicitando vacaciones o un artículo sobre IA"></textarea>
+    </label>
+    <label>
+      <span>Tono</span>
+      <select name="tono">
+        <option value="neutral">Neutral</option>
+        <option value="formal">Formal</option>
+        <option value="creativo">Creativo</option>
+        <option value="persuasivo">Persuasivo</option>
+      </select>
+    </label>
+    <label>
+      <span>Longitud</span>
+      <select name="longitud">
+        <option value="corta">Corta</option>
+        <option value="media" selected>Media</option>
+        <option value="larga">Larga</option>
+      </select>
+    </label>
+  </template>
+
+  <template id="template-improve_text">
+    <label class="full">
+      <span>Texto a mejorar</span>
+      <textarea name="texto" rows="10" placeholder="Pega aquí tu texto..."></textarea>
+    </label>
+    <label>
+      <span>Enfoque</span>
+      <select name="enfoque">
+        <option value="completo" selected>Completo</option>
+        <option value="ortografía">Ortografía</option>
+        <option value="estilo">Estilo</option>
+        <option value="claridad">Claridad</option>
+      </select>
+    </label>
+  </template>
+
+  <template id="template-summarize_text">
+    <label class="full">
+      <span>Texto largo</span>
+      <textarea name="texto" rows="10" placeholder="Pega aquí el contenido a resumir..."></textarea>
+    </label>
+    <label>
+      <span>Tipo de resumen</span>
+      <select name="estilo">
+        <option value="breve" selected>Breve</option>
+        <option value="detallado">Detallado</option>
+        <option value="puntos clave">Puntos clave</option>
+      </select>
+    </label>
+  </template>
+
+  <template id="template-formal_email">
+    <label>
+      <span>Destinatario o cargo</span>
+      <input name="destinatario" type="text" placeholder="Ej. Departamento de Recursos Humanos">
+    </label>
+    <label>
+      <span>Motivo principal</span>
+      <input name="motivo" type="text" placeholder="Ej. Solicitar vacaciones">
+    </label>
+    <label class="full">
+      <span>Puntos adicionales</span>
+      <textarea name="puntos" rows="6" placeholder="Incluye aquí datos importantes, fechas o condiciones."></textarea>
+    </label>
+  </template>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
